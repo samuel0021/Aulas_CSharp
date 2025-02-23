@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35806.99 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "testeTecnicoCommandLineLISTS", "testeTecnicoCommandLineLISTS.csproj", "{29F8F107-04E9-4165-B3B1-5672962C7BDB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{29F8F107-04E9-4165-B3B1-5672962C7BDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29F8F107-04E9-4165-B3B1-5672962C7BDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29F8F107-04E9-4165-B3B1-5672962C7BDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29F8F107-04E9-4165-B3B1-5672962C7BDB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {187604FD-F63C-4988-ABF6-2A53A2501380}
+	EndGlobalSection
+EndGlobal
