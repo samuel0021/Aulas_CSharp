@@ -4,8 +4,8 @@ namespace treinoObjetos
 {
     public class Solution
     {
-        public static int[] nums1 = { 1, 2 };
-        public static int[] nums2 = { 3, 4, 5 };
+        public static int[] nums1 = { 2, 1 };
+        public static int[] nums2 = { 4, 3 };
 
         public double FindMedianSortedArrays(int[] nums1, int[] nums2)
         {
@@ -23,7 +23,14 @@ namespace treinoObjetos
                 mergedArray[m + i] = nums2[i];
             }
 
-            Array.Sort(mergedArray);
+            sortArray(mergedArray);
+
+            Console.WriteLine("Array ordenado: ");
+            for (int i = 0; i < mergedArray.Length; i++)
+            {
+                Console.Write(mergedArray[i] + " ");
+            }
+            Console.ReadKey();
 
             int len = mergedArray.Length;
             if (len % 2 == 0)
@@ -32,10 +39,7 @@ namespace treinoObjetos
             }
 
             return mergedArray[len / 2];
-
         }
-
-
         static void Main(string[] args)
         {
             Solution sol = new Solution();
@@ -43,6 +47,24 @@ namespace treinoObjetos
             double resultado = sol.FindMedianSortedArrays(Solution.nums1, Solution.nums2);
 
             Console.WriteLine("Mediana dos elementos: " + resultado);
+        }
+
+        static void sortArray(int[] array)
+        {
+            int temp;
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                for (int j = i + 1; j < array.Length; j++)
+                {
+                    if (array[i] > array[j])
+                    {
+                        temp = array[i];
+                        array[i] = array[j];
+                        array[j] = temp;
+                    }
+                }
+            }
         }
     }
 }
