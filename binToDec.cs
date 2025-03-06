@@ -6,18 +6,16 @@ namespace treinoObjetos
     {
         public int binToDec(string n)
         {
-            int bin = 0;
-            int j = 0;
-            int num;
+            int dec = 0, j = 0, digito;
 
             for(int i = n.Length - 1; i >= 0; i--)
             {
-                num = Convert.ToInt32(n[i]) - '0';
-                bin += num * ((int)Math.Pow(2, j));
+                digito = n[i] - '0';
+                dec += digito * ((int)Math.Pow(2, j));
                 j++;
             }
 
-            return bin;
+            return dec;
         }
 
         static void Main(string[] args)
