@@ -16,13 +16,18 @@ namespace substrings
 
                 if (substrings.Length == 0) return 0;
 
+                lastWord = "";
+
                 for (int i = 0; i < characters.Length; i++)
                 {
                     if (char.IsLetterOrDigit(characters[i]))
                     {
+                        lastWord += characters[i];
                         lastLength++;
                     }
                 }
+                Console.WriteLine("Última string: " + lastWord);
+
                 return lastLength;
             }
         }
