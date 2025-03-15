@@ -36,7 +36,9 @@ namespace substrings
         {
             Solution solution = new Solution();
 
-            int length = solution.LengthOfLastWord("Preciso de um novo emprego!");
+            Console.Write("\nDigite uma frase: ");
+            string words = Console.ReadLine();
+            int length = solution.LengthOfLastWord(words);
 
             Console.WriteLine("\nO comprimento da última string é: " + length);
         }
