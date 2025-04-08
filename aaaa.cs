@@ -1,23 +1,28 @@
-namespace ConsoleApp4
-{
-    internal class Program
-    {
-        static void Main(string[] args)
-        {
-            string text = "HELLO WORLD";
 
-            foreach(char c in text){
-                for(char x = 'A'; x <= 'Z'; x++)
+internal class Program
+{
+    static void Main(string[] args)
+    {
+        string text = "HELLO WORLD";
+        string newText = "";
+        
+        foreach(char c in text)
+        {
+            for(char x = 'A'; x <= 'Z'; x++)
+            {
+                Console.WriteLine(newText + x);
+                    
+                if(c == ' ')
+                { 
+                    newText += ' ';
+                    break;
+                }
+                if(x == c)
                 {
-                    Console.WriteLine(x);
-                    if(x == c)
-                    {
-                        
-                    }
+                    newText += c;
+                    break;
                 }
             }
-
-            Console.WriteLine(text);
         }
     }
 }
