@@ -1,3 +1,5 @@
+using System;
+using System.Threading;
 
 internal class Program
 {
@@ -11,6 +13,7 @@ internal class Program
             for(char x = 'A'; x <= 'Z'; x++)
             {
                 Console.WriteLine(newText + x);
+                Thread.Sleep(50);
                     
                 if(c == ' ')
                 { 
