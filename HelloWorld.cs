@@ -13,7 +13,7 @@ internal class Program
             for(char x = 'A'; x <= 'Z'; x++)
             {
                 Console.Clear();
-                Console.WriteLine(newText + x);
+                Console.WriteLine("\n" + newText + x + "\n");
                 Thread.Sleep(10);
 
                 if (c == ' ' || x == c)
