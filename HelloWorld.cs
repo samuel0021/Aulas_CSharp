@@ -25,3 +25,21 @@ internal class Program
         }
     }
 }
+
+//-------------------------------------------------------
+
+for (int i = 32; i <= 90 || i >= 97 || i <= 122; i++)
+{
+    char x = (char)i;
+
+    Console.Clear();
+    Console.Write("\n" + newText + x + "\n");
+    Thread.Sleep(10);
+
+    if (x == c)
+    {
+        newText += c;
+        break;
+    }
+
+}
