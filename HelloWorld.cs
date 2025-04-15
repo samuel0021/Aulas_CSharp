@@ -12,6 +12,7 @@ internal class Program
         {
             for(char x = 'A'; x <= 'Z'; x++)
             {
+                Console.Clear();
                 Console.WriteLine(newText + x);
                 Thread.Sleep(10);
                     
