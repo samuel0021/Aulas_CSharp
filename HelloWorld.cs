@@ -15,15 +15,10 @@ internal class Program
                 Console.Clear();
                 Console.WriteLine(newText + x);
                 Thread.Sleep(10);
-                    
-                if(c == ' ')
-                { 
-                    newText += ' ';
-                    break;
-                }
-                if(x == c)
+
+                if (c == ' ' || x == c)
                 {
-                    newText += c;
+                    newText += c == ' ' ? ' ' : c;
                     break;
                 }
             }
