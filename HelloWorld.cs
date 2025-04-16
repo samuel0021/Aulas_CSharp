@@ -43,3 +43,58 @@ for (int i = 32; i <= 90 || i >= 97 || i <= 122; i++)
     }
 
 }
+////////////////////////////////////////////////////////////////
+
+using System;
+using System.Threading;
+
+namespace ConsoleApp6
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            string text = "hELLO WORLD!";
+            string newText = "";
+
+            foreach (char c in text)
+            {
+                if (c < 'A' || c > 'Z')
+                {
+                    for (int i = 32; i <= 64 || i >= 91 || i <= 96; i++)
+                    {
+                        char x = (char)i;
+
+                        //Console.Clear();
+                        Console.Write("\n" + newText + x);
+                        Thread.Sleep(10);
+
+                        if (x == c)
+                        {
+                            newText += c;
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    for (int i = 65; i <= 122; i++)
+                    {
+                        char x = (char)i;
+
+                        //Console.Clear();
+                        Console.WriteLine("\n" + newText + x);
+                        Thread.Sleep(10);
+
+                        if (x == c)
+                        {
+                            newText += c /*== ' ' ? ' ' : c*/;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
