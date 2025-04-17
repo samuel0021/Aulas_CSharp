@@ -54,19 +54,19 @@ namespace ConsoleApp6
     {
         static void Main(string[] args)
         {
-            string text = "hELLO WORLD!";
+            string text = "*helL]O WORLD!";
             string newText = "";
 
             foreach (char c in text)
             {
-                if (c < 'A' || c > 'Z')
+                if (((int)c < 65 || (int)c > 90) && ((int)c <97 || (int)c > 122))
                 {
                     for (int i = 32; i <= 64 || i >= 91 || i <= 96; i++)
                     {
                         char x = (char)i;
 
                         //Console.Clear();
-                        Console.Write("\n" + newText + x);
+                        Console.WriteLine("\n" + newText + x);
                         Thread.Sleep(10);
 
                         if (x == c)
@@ -80,21 +80,23 @@ namespace ConsoleApp6
                 {
                     for (int i = 65; i <= 122; i++)
                     {
-                        char x = (char)i;
+                        if ((i >= 65 && i <= 90) || (i >= 97 && i <= 122))
+                        { 
+                            char x = (char)i;
 
-                        //Console.Clear();
-                        Console.WriteLine("\n" + newText + x);
-                        Thread.Sleep(10);
+                            //Console.Clear();
+                            Console.WriteLine("\n" + newText + x);
+                            Thread.Sleep(10);
 
-                        if (x == c)
-                        {
-                            newText += c /*== ' ' ? ' ' : c*/;
-                            break;
-                        }
+                            if (x == c)
+                            {
+                                newText += c;
+                                break;
+                            }
+                        }                        
                     }
                 }
             }
         }
     }
 }
-
