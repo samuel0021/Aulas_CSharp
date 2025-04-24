@@ -35,7 +35,7 @@ namespace JogoDaForca
                 Console.WriteLine("Letras erradas: " + string.Join(" ", letrasErradas));
 
                 Console.Write("\nDigite uma letra: ");
-                entrada = Console.ReadLine();
+                entrada = Console.ReadLine().ToLower();
 
                 if (string.IsNullOrWhiteSpace(entrada) || entrada.Length != 1)
                 {
