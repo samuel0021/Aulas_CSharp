@@ -1,34 +1,48 @@
+using System;
+using System.Linq;
+using System.Collections.Generic;
+
 namespace JogoDaForca
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("\nJogo da Forca");
-
             string palavra, entrada;
             int tent = 5;
             int qtdLetras;
             char resposta;
 
+            List<string> palavras = new List<string>
+            {
+                "abacaxi", "computador", "janela", "livro", "telefone",
+                "girassol", "elefante", "montanha", "bicicleta", "oceano",
+                "planeta", "violino", "sapato", "chave", "cadeira",
+                "grama", "relogio", "avião", "nuvem", "cenoura"
+            };
 
-            palavra = "asdasdasd";
+            Random rand = new Random();
+            palavra = palavras[rand.Next(palavras.Count)];
+
             qtdLetras = palavra.Length;
+
 
             char[] letras = new char[qtdLetras];
             List<char> letrasErradas = new List<char>();
             List<char> letrasJaUsadas = new List<char>();
-
-            Console.WriteLine("\nA palavra tem " + qtdLetras + " letras");
 
             for (int i = 0; i < qtdLetras; i++)
             {
                 letras[i] = '_';
             }
 
-            while (new string(letras) != palavra && tent > 0 )
+            while (new string(letras) != palavra && tent > 0)
             {
                 Console.Clear();
+
+                Console.WriteLine("\nJogo da Forca");
+
+                Console.WriteLine("\nA palavra tem " + qtdLetras + " letras\n");
 
                 Console.WriteLine("Palavra: " + string.Join(" ", letras) + "\n");
                 Console.WriteLine("Tentativas: " + tent);
@@ -79,6 +93,7 @@ namespace JogoDaForca
                 Console.WriteLine("Palavra: " + string.Join(" ", letras));
                 Console.WriteLine("Tentativas: " + tent);
                 Console.WriteLine("\nAs tentativas acabaram!\nPerdeu!");
+                Console.WriteLine("A palavra era " + palavra);
             }
             else
             {
@@ -91,3 +106,4 @@ namespace JogoDaForca
         }
     }
 }
+
