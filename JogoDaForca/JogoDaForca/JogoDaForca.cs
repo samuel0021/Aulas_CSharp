@@ -197,9 +197,9 @@ namespace JogoDaForca
             if (Tentativas > 0)
                 Console.WriteLine("\nParabéns! Você acertou!");
             else
-                Console.WriteLine("\nVocê perdeu!");
+                Console.WriteLine("\nParabéns! Você perdeu!");
 
-            Console.WriteLine($"\nA palavra era: {Palavra}");
+            Console.WriteLine("\nA palavra era: " + Palavra);
         }
     }
 }
