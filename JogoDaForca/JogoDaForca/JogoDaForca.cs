@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace JogoDaForca
@@ -15,7 +15,7 @@ namespace JogoDaForca
         public void Iniciar()
         {
             Tema = EscolherTema();
-            Tentativas = EscolherDificuldade();            
+            Tentativas = EscolherDificuldade();
 
             Palavra = EscolherPalavraAleatoria(Tema);
             Letras = new string('_', Palavra.Length).ToCharArray();
@@ -57,7 +57,8 @@ namespace JogoDaForca
         }
 
         private char LerEntrada()
-        {   Console.Clear();
+        {
+            Console.Clear();
 
             MostrarStatus();
 
@@ -131,7 +132,10 @@ namespace JogoDaForca
             Console.WriteLine("\n   Escolha o tema da palavra: ");
             Console.WriteLine("\n - Comidas ( 1 ) - Lugares ( 2 )" +
                               "\n - Animais ( 3 ) - Objetos ( 4 )" +
-                              "\n - Espaço  ( 5 ) - Extras  ( 6 )\n");
+                              "\n - Espaço  ( 5 ) - Extras  ( 6 )" +
+                              "\n - Tecnologia ( 7 ) - Meios de Transporte ( 8 )" +
+                              "\n - Cores ( 9 ) - Instrumentos Musicais ( 10 )\n");
+
             Console.Write("\nOpção: ");
 
             while (!int.TryParse(Console.ReadLine(), out tema) || tema < 1 || tema > 6)
@@ -166,7 +170,24 @@ namespace JogoDaForca
                     NomeTemaAtual = "Extras";
                     listaEscolhida = Temas.extras;
                     break;
+                case 7:
+                    NomeTemaAtual = "Tecnologia";
+                    listaEscolhida = Temas.tecnologia;
+                    break;
+                case 8:
+                    NomeTemaAtual = "Meios de Transporte";
+                    listaEscolhida = Temas.transportes;
+                    break;
+                case 9:
+                    NomeTemaAtual = "Cores";
+                    listaEscolhida = Temas.cores;
+                    break;
+                case 10:
+                    NomeTemaAtual = "Instrumentos Musicais";
+                    listaEscolhida = Temas.instrumentosMusicais;
+                    break;
             }
+
 
             return listaEscolhida;
         }
