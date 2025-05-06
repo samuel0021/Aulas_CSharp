@@ -138,9 +138,9 @@ namespace JogoDaForca
 
             Console.Write("\nOpção: ");
 
-            while (!int.TryParse(Console.ReadLine(), out tema) || tema < 1 || tema > 6)
+            while (!int.TryParse(Console.ReadLine(), out tema) || tema < 1 || tema > 10)
             {
-                Mensagem("Digite apenas um número de 1 a 6!");
+                Mensagem("Digite apenas um número de 1 a 10!");
                 return EscolherTema();
             }
 
