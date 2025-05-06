@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections.Generic;
 
@@ -46,6 +47,7 @@ namespace JogoDaForca
                 {
                     LetrasErradas.Add(entrada);
                     Tentativas--;
+
                     Mensagem("Letra errada!");
                 }
             }
@@ -66,6 +68,10 @@ namespace JogoDaForca
             MostrarStatus();
 
             Console.Write("\nDigite uma letra: ");
+            int x = Console.CursorLeft;
+            int y = Console.CursorTop;
+            Console.SetCursorPosition(x, y);
+
             string entrada = Console.ReadLine().ToLower();
 
             if (string.IsNullOrWhiteSpace(entrada) || entrada.Length != 1)
@@ -75,6 +81,19 @@ namespace JogoDaForca
             }
 
             return entrada[0];
+
+            /*while (true)
+            {
+                ConsoleKeyInfo tecla = Console.ReadKey(true); // não exibe
+
+                if (char.IsLetter(tecla.KeyChar))
+                {
+                    char letra = char.ToLower(tecla.KeyChar);
+                    Console.WriteLine(letra); // exibe após validação
+
+                    return letra;
+                }
+            }*/
         }
 
         private void RevelarLetra(char letra)
@@ -200,6 +219,9 @@ namespace JogoDaForca
             Console.WriteLine("\nJogo da Forca");
             Console.WriteLine("\nTema: " + NomeTemaAtual);
             Console.WriteLine("Dificuldade: " + Dificuldade);
+
+            bonequinho(Dificuldade, Tentativas);
+
             Console.WriteLine("\nA palavra tem " + Palavra.Length + " letras\n");
             Console.WriteLine("Palavra: " + string.Join(" ", Letras));
             Console.WriteLine("\nTentativas: " + Tentativas);
@@ -224,6 +246,151 @@ namespace JogoDaForca
                 Console.WriteLine("\nParabéns! Você perdeu!");
 
             Console.WriteLine("\nA palavra era: " + Palavra);
+
+            bonequinho(Dificuldade, Tentativas);
+        }
+
+        public void bonequinho(string dif, int tent)
+        {
+            int totalTent = 0;
+
+            switch (dif)
+            {
+                case "Fácil":
+                    totalTent = 7;
+                    break;
+
+                case "Médio":
+                    totalTent = 5;
+                    break;
+
+                case "Difícil":
+                    totalTent = 3;
+                    break;
+            }
+
+            int erros = totalTent - tent;
+
+            DesenhaBonequinho(dif, erros);
+
+            /*if (erros >= 1)
+            {
+                Console.WriteLine();
+                Console.WriteLine("   O  ");
+                int x = Console.CursorLeft;
+                int y = Console.CursorTop;
+                Console.SetCursorPosition(x, y);
+            }
+
+            if (erros >= 2 && (dif == "Difícil" || dif == "Médio"))
+            {
+                Console.WriteLine("  /|\\");
+            }
+            if (erros >= 3 && dif == "Difícil")
+            {
+                Console.WriteLine("  / \\");
+            }
+
+
+            if (erros == 3 && dif == "Médio")
+            {
+                Console.WriteLine("  /");
+            }
+            if (erros == 4 && dif == "Médio")
+            {
+                Console.WriteLine("  / \\");
+            }
+            if (erros == 5 && dif == "Médio")
+            {
+                Console.WriteLine("  / \\ x");
+            }
+
+
+            if (erros == 2 && dif == "Fácil")
+            {
+                Console.WriteLine("   |");
+            }
+            if (erros == 3 && dif == "Fácil")
+            {
+                Console.WriteLine("  /|");
+            }
+            if (erros == 4 && dif == "Fácil")
+            {
+                Console.WriteLine("  /|\\");
+            }
+            if (erros >= 5 && dif == "Fácil")
+            {
+                Console.WriteLine("  /|\\");
+                Console.WriteLine("  /");
+            }
+            if (erros == 6 && dif == "Fácil")
+            {
+                Console.WriteLine("  /|\\");
+                Console.WriteLine("  / \\");
+            }
+            if (erros == 7 && dif == "Fácil")
+            {
+                Console.WriteLine("  /|\\");
+                Console.WriteLine("  /'\\");
+            }*/
+        }
+
+        private void DesenhaBonequinho(string dif, int erros)
+        {
+            if (dif == "Fácil")
+            {
+                DesenhaFacil(erros);
+            }
+            else
+            {
+                DesenhaDificilMedio(dif, erros);
+            }
+        }
+
+        private void DesenhaFacil(int erros)
+        {
+            Console.WriteLine();
+
+            switch (erros)
+            {
+                case 1:
+                    Console.WriteLine("   O  ");
+                    break;
+
+                case 2:
+                    Console.WriteLine("   O  ");
+                    Console.WriteLine("   |  ");
+                    break;
+                case 3:
+                    Console.WriteLine("   O  ");
+                    Console.WriteLine("  /|  ");
+                    break;
+                case 4:
+                    Console.WriteLine("   O  ");
+                    Console.WriteLine("  /|\\  ");
+                    break;
+                case 5:
+                    Console.WriteLine("   O  ");
+                    Console.WriteLine("  /|\\  ");
+                    Console.WriteLine("  /  ");
+                    break;
+                case 6:
+                    Console.WriteLine("   O  ");
+                    Console.WriteLine("  /|\\  ");
+                    Console.WriteLine("  / \\ ");
+                    break;
+                case 7:
+                    Console.WriteLine("   O  ");
+                    Console.WriteLine("  /|\\  ");
+                    Console.WriteLine("  /'\\ ");
+                    break;
+            }
+
+        }
+
+        private void DesenhaDificilMedio(string dif, int erros)
+        {
+
         }
     }
 }
