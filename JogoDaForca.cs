@@ -1,109 +1,226 @@
 using System;
-using System.Linq;
 using System.Collections.Generic;
 
 namespace JogoDaForca
 {
-    internal class Program
+    public class JogoDaForca
     {
-        static void Main(string[] args)
+        private int Tentativas;
+        private string Palavra, NomeTemaAtual, Dificuldade;
+        private char[] Letras;
+        private List<char> LetrasErradas = new List<char>();
+        private List<char> LetrasUsadas = new List<char>();
+        private List<string> Tema = new List<string>();
+
+        public void Iniciar()
         {
-            string palavra, entrada;
-            int tent = 5;
-            int qtdLetras;
-            char resposta;
+            Tema = EscolherTema();
+            Tentativas = EscolherDificuldade();
 
-            List<string> palavras = new List<string>
+            Palavra = EscolherPalavraAleatoria(Tema);
+            Letras = new string('_', Palavra.Length).ToCharArray();
+
+            while (new string(Letras) != Palavra && Tentativas > 0)
             {
-                "abacaxi", "computador", "janela", "livro", "telefone",
-                "girassol", "elefante", "montanha", "bicicleta", "oceano",
-                "planeta", "violino", "sapato", "chave", "cadeira",
-                "grama", "relogio", "avião", "nuvem", "cenoura"
-            };
+                Console.Clear();
+                MostrarStatus();
 
+                char entrada = LerEntrada();
+
+                if (LetrasUsadas.Contains(entrada))
+                {
+                    Mensagem("Você já tentou essa letra!");
+                    continue;
+                }
+
+                LetrasUsadas.Add(entrada);
+
+                if (Palavra.Contains(entrada))
+                {
+                    RevelarLetra(entrada);
+                }
+                else
+                {
+                    LetrasErradas.Add(entrada);
+                    Tentativas--;
+                    Mensagem("Letra errada!");
+                }
+            }
+
+            FinalizarJogo();
+        }
+
+        private string EscolherPalavraAleatoria(List<string> temas)
+        {
             Random rand = new Random();
-            palavra = palavras[rand.Next(palavras.Count)];
+            return temas[rand.Next(temas.Count)];
+        }
 
-            qtdLetras = palavra.Length;
+        private char LerEntrada()
+        {
+            Console.Clear();
 
+            MostrarStatus();
 
-            char[] letras = new char[qtdLetras];
-            List<char> letrasErradas = new List<char>();
-            List<char> letrasJaUsadas = new List<char>();
+            Console.Write("\nDigite uma letra: ");
+            string entrada = Console.ReadLine().ToLower();
 
-            for (int i = 0; i < qtdLetras; i++)
+            if (string.IsNullOrWhiteSpace(entrada) || entrada.Length != 1)
             {
-                letras[i] = '_';
+                Mensagem("Digite apenas uma letra!");
+                return LerEntrada();
             }
 
-            while (new string(letras) != palavra && tent > 0)
+            return entrada[0];
+        }
+
+        private void RevelarLetra(char letra)
+        {
+            for (int i = 0; i < Palavra.Length; i++)
             {
-                Console.Clear();
-
-                Console.WriteLine("\nJogo da Forca");
-
-                Console.WriteLine("\nA palavra tem " + qtdLetras + " letras\n");
-
-                Console.WriteLine("Palavra: " + string.Join(" ", letras) + "\n");
-                Console.WriteLine("Tentativas: " + tent);
-                Console.WriteLine("Letras erradas: " + string.Join(" ", letrasErradas));
-
-                Console.Write("\nDigite uma letra: ");
-                entrada = Console.ReadLine().ToLower();
-
-                if (string.IsNullOrWhiteSpace(entrada) || entrada.Length != 1)
+                if (Palavra[i] == letra)
                 {
-                    Console.WriteLine("\nDigite apenas uma letra!\nAperte qualquer tecla para tentar novamente...");
-                    Console.ReadKey();
-                    continue;
-                }
-
-                resposta = entrada[0];
-
-                if (letrasJaUsadas.Contains(resposta))
-                {
-                    Console.WriteLine("\nVocê já tentou essa letra!\nAperte qualquer tecla para tentar novamente...");
-                    Console.ReadKey();
-                    continue;
-                }
-
-                bool letraValida = false;
-
-                for (int i = 0; i < qtdLetras; i++)
-                {
-                    if (resposta == palavra[i])
-                    {
-                        letras[i] = resposta;
-                        letraValida = true;
-                        letrasJaUsadas.Add(resposta);
-                    }
-                }
-                if (letraValida == false)
-                {
-                    Console.WriteLine("\nLetra errada!\nAperte qualquer tecla para tentar novamente...");
-                    Console.ReadKey();
-                    letrasErradas.Add(resposta);
-                    letrasJaUsadas.Add(resposta);
-                    tent--;
+                    Letras[i] = letra;
                 }
             }
-            if (tent <= 0)
+        }
+
+        private int EscolherDificuldade()
+        {
+            Console.Clear();
+
+            int dificuldade;
+
+            Console.WriteLine("\n   Escolha a dificuldade do jogo: ");
+            Console.WriteLine("\n - Fácil   ( 1 )\n - Médio   ( 2 )\n - Difícil ( 3 )");
+            Console.Write("\nOpção: ");
+
+            while (!int.TryParse(Console.ReadLine(), out dificuldade) || dificuldade < 1 || dificuldade > 3)
             {
-                Console.Clear();
-                Console.WriteLine("Palavra: " + string.Join(" ", letras));
-                Console.WriteLine("Tentativas: " + tent);
-                Console.WriteLine("\nAs tentativas acabaram!\nPerdeu!");
-                Console.WriteLine("A palavra era " + palavra);
+                Mensagem("Digite apenas um número de 1 a 3!");
+                return EscolherDificuldade();
             }
+
+            switch (dificuldade)
+            {
+                case 1:
+                    Dificuldade = "Fácil";
+                    Tentativas = 7;
+                    break;
+
+                case 2:
+                    Dificuldade = "Médio";
+                    Tentativas = 5;
+                    break;
+
+                case 3:
+                    Dificuldade = "Difícil";
+                    Tentativas = 3;
+                    break;
+            }
+
+            return Tentativas;
+        }
+
+        private List<string> EscolherTema()
+        {
+            Console.Clear();
+
+            int tema;
+            List<string> listaEscolhida = null;
+
+            Console.WriteLine("\n   Escolha o tema da palavra: ");
+            Console.WriteLine("\n -    Comidas  ( 1 ) - ( 2 )  Lugares" +
+                              "\n -    Animais  ( 3 ) - ( 4 )  Objetos " +
+                              "\n -     Espaço  ( 5 ) - ( 6 )  Extras" +
+                              "\n - Tecnologia  ( 7 ) - ( 8 )  Transporte" +
+                              "\n -      Cores  ( 9 ) - ( 10 ) Instrumentos\n");
+
+            Console.Write("\nOpção: ");
+
+            while (!int.TryParse(Console.ReadLine(), out tema) || tema < 1 || tema > 10)
+            {
+                Mensagem("Digite apenas um número de 1 a 10!");
+                return EscolherTema();
+            }
+
+            switch (tema)
+            {
+                case 1:
+                    NomeTemaAtual = "Comidas";
+                    listaEscolhida = Temas.comidas;
+                    break;
+                case 2:
+                    NomeTemaAtual = "Lugares";
+                    listaEscolhida = Temas.lugares;
+                    break;
+                case 3:
+                    NomeTemaAtual = "Animais";
+                    listaEscolhida = Temas.animais;
+                    break;
+                case 4:
+                    NomeTemaAtual = "Objetos";
+                    listaEscolhida = Temas.objetos;
+                    break;
+                case 5:
+                    NomeTemaAtual = "Espaço";
+                    listaEscolhida = Temas.espaco;
+                    break;
+                case 6:
+                    NomeTemaAtual = "Extras";
+                    listaEscolhida = Temas.extras;
+                    break;
+                case 7:
+                    NomeTemaAtual = "Tecnologia";
+                    listaEscolhida = Temas.tecnologia;
+                    break;
+                case 8:
+                    NomeTemaAtual = "Meios de Transporte";
+                    listaEscolhida = Temas.transportes;
+                    break;
+                case 9:
+                    NomeTemaAtual = "Cores";
+                    listaEscolhida = Temas.cores;
+                    break;
+                case 10:
+                    NomeTemaAtual = "Instrumentos Musicais";
+                    listaEscolhida = Temas.instrumentosMusicais;
+                    break;
+            }
+
+
+            return listaEscolhida;
+        }
+
+        private void MostrarStatus()
+        {
+            Console.WriteLine("\nJogo da Forca");
+            Console.WriteLine("\nTema: " + NomeTemaAtual);
+            Console.WriteLine("Dificuldade: " + Dificuldade);
+            Console.WriteLine("\nA palavra tem " + Palavra.Length + " letras\n");
+            Console.WriteLine("Palavra: " + string.Join(" ", Letras));
+            Console.WriteLine("\nTentativas: " + Tentativas);
+            Console.WriteLine("Letras erradas: " + string.Join(" ", LetrasErradas));
+        }
+
+        private void Mensagem(string texto)
+        {
+            Console.WriteLine($"\n{texto}\nAperte qualquer tecla para continuar...");
+            Console.ReadKey();
+        }
+
+        private void FinalizarJogo()
+        {
+            Console.Clear();
+            Console.WriteLine("Palavra: " + string.Join(" ", Letras));
+            Console.WriteLine("Tentativas restantes: " + Tentativas);
+
+            if (Tentativas > 0)
+                Console.WriteLine("\nParabéns! Você acertou!");
             else
-            {
-                Console.Clear();
+                Console.WriteLine("\nParabéns! Você perdeu!");
 
-                Console.WriteLine("Palavra: " + string.Join(" ", letras));
-                Console.WriteLine("Tentativas: " + tent);
-                Console.WriteLine("\nParabéns!");
-            }
+            Console.WriteLine("\nA palavra era: " + Palavra);
         }
     }
 }
-
