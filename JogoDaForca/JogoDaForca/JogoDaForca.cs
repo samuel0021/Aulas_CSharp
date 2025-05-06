@@ -130,11 +130,11 @@ namespace JogoDaForca
             List<string> listaEscolhida = null;
 
             Console.WriteLine("\n   Escolha o tema da palavra: ");
-            Console.WriteLine("\n - Comidas ( 1 ) - Lugares ( 2 )" +
-                              "\n - Animais ( 3 ) - Objetos ( 4 )" +
-                              "\n - Espaço  ( 5 ) - Extras  ( 6 )" +
-                              "\n - Tecnologia ( 7 ) - Meios de Transporte ( 8 )" +
-                              "\n - Cores ( 9 ) - Instrumentos Musicais ( 10 )\n");
+            Console.WriteLine("\n -    Comidas ( 1 ) - ( 2 ) Lugares" +
+                              "\n -    Animais ( 3 ) - ( 4 ) Objetos" +
+                              "\n -    Espaço  ( 5 ) - ( 6 ) Extras" +
+                              "\n - Tecnologia ( 7 ) - ( 8 ) Meios de Transporte" +
+                              "\n -      Cores ( 9 ) - ( 10 ) Instrumentos Musicais\n");
 
             Console.Write("\nOpção: ");
 
