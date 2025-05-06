@@ -14,6 +14,9 @@ namespace JogoDaForca
 
         public void Iniciar()
         {
+            LetrasErradas.Clear();
+            LetrasUsadas.Clear();
+
             Tema = EscolherTema();
             Tentativas = EscolherDificuldade();
 
@@ -203,7 +206,7 @@ namespace JogoDaForca
             Console.WriteLine("Letras erradas: " + string.Join(" ", LetrasErradas));
         }
 
-        private void Mensagem(string texto)
+        public static void Mensagem(string texto)
         {
             Console.WriteLine($"\n{texto}\nAperte qualquer tecla para continuar...");
             Console.ReadKey();
