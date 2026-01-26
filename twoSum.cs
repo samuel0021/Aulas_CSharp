@@ -17,6 +17,22 @@ namespace treinoObjetos
                 }
             }
             return new int[0];
+
+            /*
+            Dictionary<int, int> map = new Dictionary<int, int>();
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+                int complemento = target - nums[i];
+
+                if (map.ContainsKey(complemento))
+                {
+                    return new int[] { map[complemento], i };
+                }
+                map[nums[i]] = i;
+            }
+            return new int[0];
+            */
         }
         static void Main(string[] args)
         {
