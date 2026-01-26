@@ -6,17 +6,12 @@ namespace treinoObjetos
     {
         public int[] TwoSum(int[] nums, int target)
         {
-            int sum;
             for (int i = 0; i < nums.Length; i++)
             {
-                for (int j = i + 1; j < nums.Length; j++)
+                for (int j = i++; j < nums.Length; j++)
                 {
-                    sum = nums[i] + nums[j];
-
-                    if (sum == target)
+                    if (nums[i] + nums[j] == target)
                     {
-                        int[] index = { nums[i], nums[j] };
-
                         return new int[] { i, j };
                     }
                 }
